@@ -1,0 +1,10 @@
+﻿name: MiniEvents
+version: 1.0
+description: Plugin du serveur PvP/Faction permettant les événements spéciaux.
+author: Glynix
+
+main: fr.glynix.minievents.Main
+commands:
+  event:
+    permission: admin.event
+    description: Gestion des événements.
