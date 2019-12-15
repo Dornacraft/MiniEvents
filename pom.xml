@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ==================================================================================================== -->
+    <!-- Project informations -->
+    <!-- ==================================================================================================== -->
+    <!-- ===== Maven Informations ===== -->
+    <groupId>fr.dornacraft.minievents</groupId>
+    <artifactId>mini-events</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <!-- ===== Global Informations ===== -->
+    <name>MiniEvents</name>
+    <description>Plugin permettant de lancer des mini-events sur le serveur.</description>
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>Voltariuss</id>
+            <name>Loïc Dubois-Termoz</name>
+            <email>loic.duboistermoz@outlook.fr</email>
+            <roles>
+                <role>project management</role>
+            </roles>
+            <timezone>Europe/Paris</timezone>
+        </developer>
+        <developer>
+            <id>Glynix</id>
+            <name>A COMPLETER</name>
+            <email>A COMPLETER</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+                <role>tester</role>
+                <role>support</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <!-- =============================================================================== -->
+    <!-- Properties -->
+    <!-- =============================================================================== -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- ==================================================================================================== -->
+    <!-- Repositories -->
+    <!-- ==================================================================================================== -->
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <!-- ==================================================================================================== -->
+    <!-- Dependencies -->
+    <!-- ==================================================================================================== -->
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>16.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- ==================================================================================================== -->
+    <!-- Build -->
+    <!-- ==================================================================================================== -->
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+
+        <sourceDirectory>${project.basedir}/src/main/java/</sourceDirectory>
+        <directory>${project.basedir}/target</directory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <finalName>${project.name}-${project.version}.MC-1.12.2</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>
