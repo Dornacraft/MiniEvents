@@ -3,24 +3,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- ==================================================================================================== -->
-    <!-- Project informations -->
-    <!-- ==================================================================================================== -->
-    <!-- ===== Maven Informations ===== -->
     <groupId>fr.dornacraft.minievents</groupId>
-    <artifactId>mini-events</artifactId>
-    <version>1.0</version>
+    <artifactId>minievents</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <!-- ===== Global Informations ===== -->
     <name>MiniEvents</name>
     <description>Plugin permettant de lancer des mini-events sur le serveur.</description>
+    <inceptionYear>2019</inceptionYear>
+    <url>https://github.com/Dornacraft/MiniEvents</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <powermock.version>2.0.4</powermock.version>
+        <minecraft.version>1.12.2</minecraft.version>
+    </properties>
+
     <licenses>
         <license>
-            <name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
-            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+            <name>MIT</name>
+            <url>https://github.com/Dornacraft/MiniEvents/blob/master/LICENSE</url>
+            <distribution>manual</distribution>
         </license>
     </licenses>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/Dornacraft/MiniEvents/issues</url>
+    </issueManagement>
+
     <developers>
         <developer>
             <id>Voltariuss</id>
@@ -44,16 +55,6 @@
         </developer>
     </developers>
 
-    <!-- =============================================================================== -->
-    <!-- Properties -->
-    <!-- =============================================================================== -->
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <!-- ==================================================================================================== -->
-    <!-- Repositories -->
-    <!-- ==================================================================================================== -->
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -61,10 +62,8 @@
         </repository>
     </repositories>
 
-    <!-- ==================================================================================================== -->
-    <!-- Dependencies -->
-    <!-- ==================================================================================================== -->
     <dependencies>
+        <!-- provided -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -75,18 +74,23 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>16.0.2</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
-    <!-- ==================================================================================================== -->
-    <!-- Build -->
-    <!-- ==================================================================================================== -->
     <build>
         <defaultGoal>clean install</defaultGoal>
 
         <sourceDirectory>${project.basedir}/src/main/java/</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/java/</testSourceDirectory>
         <directory>${project.basedir}/target</directory>
+
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
@@ -96,25 +100,50 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <finalName>${project.name}-${project.version}.MC-1.12.2</finalName>
+                    <finalName>${project.name}-${project.version}.MC-${minecraft.version}</finalName>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>*.yml</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
