@@ -46,6 +46,7 @@ public class CommandEVENT implements CommandExecutor {
 			if (args.length >= 1) {
 				// Le joueur éxecute la commande /event teleport
 				if (args[0].equalsIgnoreCase("teleport")) {
+					//TELEPORT
 					ArgTELEPORT.ArgTeleport(player);
 					return true;
 				}
