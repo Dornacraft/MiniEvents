@@ -44,64 +44,29 @@ public class CommandEVENT implements CommandExecutor {
 				return true;
 			}
 			if (args.length >= 1) {
-				// Le joueur éxecute la commande /event teleport
-				if (args[0].equalsIgnoreCase("teleport")) {
-					//TELEPORT
-					ArgTELEPORT.ArgTeleport(player);
-					return true;
-				}
-				// Le joueur éxecute la commande /event participants
-				if (args[0].equalsIgnoreCase("participants")) {
-					ArgPARTICIPANTS.ArgParticipants(main, player);
-					return true;
-				}
-				// Le joueur éxecute la commande /event state
-				if (args[0].equalsIgnoreCase("state")) {
-					ArgSTATE.ArgState(player, main.prefix, main.getGameState());
-					return true;
-				}
-				// Le joueur éxecute la commande /event type
-				if (args[0].equalsIgnoreCase("name")) {
-					ArgNAME.ArgName(player, main.prefix, main.getGameName());
-					return true;
-				}
-				// Le joueur éxecute la commande /event help
-				if (args[0].equalsIgnoreCase("help")) {
-					ArgHELP.ArgHelp(player);
-					return true;
-				}
-				// Le joueur éxecute la commande /event startlist
-				if (args[0].equalsIgnoreCase("startlist")) {
-					ArgSTARTLIST.ArgStartList(main.prefix, player);
-					return true;
-				}
-				// Le joueur éxecute la commande /event join
-				if (args[0].equalsIgnoreCase("join")) {
-					ArgJOIN.ArgJoin(player, main);
-					return true;
-				}
-				// Le joueur éxecute la commande /event leave
-				if (args[0].equalsIgnoreCase("leave")) {
-					ArgLEAVE.ArgLeave(player, main);
-					return true;
-				}
-				// Le joueur éxecute la commande /event run
-				if (args[0].equalsIgnoreCase("run")) {
-					ArgRUN.ArgRun(player, main);
-					return true;
-				}
-				// Le joueur éxecute la commande /event forcerun
-				if (args[0].equalsIgnoreCase("forcerun")) {
+				switch (args[0].toLowerCase()) {
+				case "forcerun":
 					ArgFORCERUN.ArgForceRun(player, main);
 					return true;
-				}
-				// Le joueur éxecute la commande /event stop
-				if (args[0].equalsIgnoreCase("stop")) {
-					ArgSTOP.ArgStop(player, main);
+				case "help":
+					ArgHELP.ArgHelp(player);
 					return true;
-				}
-				// Le joueur éxecute la commande /event start
-				if (args[0].equalsIgnoreCase("start")) {
+				case "join":
+					ArgJOIN.ArgJoin(player, main);
+					return true;
+				case "leave":
+					ArgLEAVE.ArgLeave(player, main);
+					return true;
+				case "name":
+					ArgNAME.ArgName(player, main.prefix, main.getGameName());
+					return true;
+				case "participants":
+					ArgPARTICIPANTS.ArgParticipants(main, player);
+					return true;
+				case "run":
+					ArgRUN.ArgRun(player, main);
+					return true;
+				case "start":
 					if (args.length >= 2) {
 						List<GameName> eventNames = Arrays.asList(GameName.values());
 						for (int i = 0; i < eventNames.size(); i++) {
@@ -114,12 +79,23 @@ public class CommandEVENT implements CommandExecutor {
 						}
 						player.sendMessage(main.prefix + badStartList);
 						return true;
-
 					} else {
 						player.sendMessage(main.prefix + incompleteStartList);
 						return true;
 					}
-				} else {
+				case "startlist":
+					ArgSTARTLIST.ArgStartList(main.prefix, player);
+					return true;
+				case "state":
+					ArgSTATE.ArgState(player, main.prefix, main.getGameState());
+					return true;
+				case "stop":
+					ArgSTOP.ArgStop(player, main);
+					return true;
+				case "teleport":
+					ArgTELEPORT.ArgTeleport(player);
+					return true;
+				default:
 					player.sendMessage(main.prefix + badCommand);
 					return true;
 				}
