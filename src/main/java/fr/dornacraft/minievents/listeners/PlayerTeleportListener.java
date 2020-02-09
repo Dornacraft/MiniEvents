@@ -14,6 +14,7 @@ import fr.dornacraft.minievents.GameState;
 import fr.dornacraft.minievents.Main;
 import fr.dornacraft.minievents.events.GetEventWorld;
 import fr.dornacraft.minievents.events.PlayerElimination;
+import fr.dornacraft.minievents.events.PlayerRemaining;
 import fr.dornacraft.minievents.events.WhoIsWinner;
 
 public class PlayerTeleportListener implements Listener {
@@ -57,6 +58,7 @@ public class PlayerTeleportListener implements Listener {
 					PlayerElimination.EventElimationMessageOutWorld(pls, player, main);
 				}
 			}
+			PlayerRemaining.PlayerLeft(main);
 
 			// Suppression du joueur de la liste des participants et on regarde si il y a un
 			// gagnant.

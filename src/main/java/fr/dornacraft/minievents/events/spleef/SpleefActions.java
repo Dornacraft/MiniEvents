@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.dornacraft.minievents.Main;
-import fr.dornacraft.minievents.events.PlayerRemaining;
 
 public class SpleefActions {
 
@@ -15,7 +14,6 @@ public class SpleefActions {
 	public static void EventElimationMessageWater(Player players, Player playerOnWater, Main main) {
 		players.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + playerOnWater.getName()
 				+ " §7est tombé à l'eau !");
-		PlayerRemaining.PlayerLeft(main);
 	}
 	// *********************************************************************************************//
 

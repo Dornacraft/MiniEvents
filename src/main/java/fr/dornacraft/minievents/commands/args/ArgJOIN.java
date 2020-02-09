@@ -1,6 +1,9 @@
 package fr.dornacraft.minievents.commands.args;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import fr.dornacraft.minievents.GameState;

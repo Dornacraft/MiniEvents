@@ -35,12 +35,12 @@ public class CooldownOnEnd extends BukkitRunnable {
 				// Quand le cooldown se termine, on affiche ce message :
 				if (cooldown == 0) {
 					player.sendMessage("§f[§b" + name.name().toUpperCase() + "§f] §7Téléportation hors de la zone !");
-					OnStartEndOfEvent.EventFinishGame(main); // Action à effectuer à la fin du cooldown de fin
+					player.teleport(GetSpawnsParameters.LocationEventSpawn(main));
+					PlayerSettings.setSettings(player);
 				}
 			}
 			if (cooldown == 0) {
-				main.setGameState(GameState.NOTSTARTED); // Le status de jeu change en "NOTSTARTED", l'event se termine
-				main.setGameName(GameName.NONE); // Le jeu passe en "NONE" pour dire que aucun jeu n'a démarré.
+				OnStartEndOfEvent.EventEndAndRAZ(main);
 				cancel();
 			}
 			cooldown--;

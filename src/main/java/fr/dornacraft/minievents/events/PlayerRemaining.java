@@ -10,6 +10,7 @@ import fr.dornacraft.minievents.Main;
 
 public class PlayerRemaining {
 	public static void PlayerLeft(Main main) {
+		
 		if (main.getGameState() == GameState.PLAYING || main.getGameState() == GameState.WAITING) {
 			String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
 			if (main.getParticipants().size() >= 2) {

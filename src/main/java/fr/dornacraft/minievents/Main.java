@@ -76,8 +76,7 @@ public class Main extends JavaPlugin {
 		return leaveDuringEvent;
 	}
 
-	// Méthode permettant de récuperer la liste des joueurs déconnectés durant
-	// l'événement.
+	// Méthode permettant de récuperer une liste de locations de blocks
 	public List<Location> getBlockLoc() {
 		return blockLocation;
 	}

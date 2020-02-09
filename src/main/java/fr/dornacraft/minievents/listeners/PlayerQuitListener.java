@@ -12,6 +12,7 @@ import fr.dornacraft.minievents.GameState;
 import fr.dornacraft.minievents.Main;
 import fr.dornacraft.minievents.events.GetEventWorld;
 import fr.dornacraft.minievents.events.PlayerElimination;
+import fr.dornacraft.minievents.events.PlayerRemaining;
 import fr.dornacraft.minievents.events.WhoIsWinner;
 
 public class PlayerQuitListener implements Listener {
@@ -59,6 +60,8 @@ public class PlayerQuitListener implements Listener {
 							PlayerElimination.EventElimationMessageQuit(pls, disconnectedPlayer, main);
 						}
 					}
+					PlayerRemaining.PlayerLeft(main);
+					
 					// On regarde si après l'avoir supprimé de la liste des participants il y a un
 					// gagnant dans l'événement en cours.
 					WhoIsWinner.getWinner(main.getParticipants(), main);

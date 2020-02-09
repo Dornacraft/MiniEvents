@@ -39,7 +39,7 @@ public class CooldownOnStart extends BukkitRunnable {
 							|| cooldown == 2) {
 						player.sendMessage(eventPrefix + "§7Le jeu commence dans §b" + cooldown + " §7secondes !");
 						if (cooldown == 15) {
-							OnStartEndOfEvent.CooldownStart15(player, main);
+							OnStartEndOfEvent.CooldownStartOnStart(player, main);
 						}
 					}
 					if (cooldown == 1) {
@@ -47,7 +47,7 @@ public class CooldownOnStart extends BukkitRunnable {
 					}
 					if (cooldown == 0) {
 						player.sendMessage(eventPrefix + "§7Le jeu commence ! À vos pelles et bonne chance à tous !");
-						OnStartEndOfEvent.CooldownStart0(player, main);
+						OnStartEndOfEvent.CooldownStartOnEnd(player, main);
 					}
 				}
 				// *************************************************************************//

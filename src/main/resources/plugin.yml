@@ -1,7 +1,8 @@
-﻿name: MiniEvents
-version: 1.0
-description: Plugin du serveur PvP/Faction permettant les événements spéciaux.
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
 author: Glynix
+main: ${project.groupId}.Main
 
 main: fr.dornacraft.minievents.Main
 commands:
