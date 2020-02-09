@@ -3,7 +3,7 @@ version: 1.0
 description: Plugin du serveur PvP/Faction permettant les événements spéciaux.
 author: Glynix
 
-main: fr.glynix.minievents.Main
+main: fr.dornacraft.minievents.Main
 commands:
   event:
     permission: admin.event

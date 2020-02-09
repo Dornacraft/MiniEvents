@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import fr.dornacraft.minievents.GameName;
@@ -54,6 +56,7 @@ public class OnStartEndOfEvent {
 
 		main.getParticipants().clear();
 		main.getLeaveDuringEvent().clear();
+		EventRegeneration(main);
 	}
 
 	public static void EventStop(Main main) {
@@ -70,10 +73,18 @@ public class OnStartEndOfEvent {
 				player.sendMessage(main.prefix + "§7Téléportation de tous les joueurs !");
 			}
 		}
-
+		
+		EventRegeneration(main);
 		main.setGameName(GameName.NONE);
 		main.setGameState(GameState.NOTSTARTED);
 		main.getParticipants().clear();
 		main.getLeaveDuringEvent().clear();
+	}
+	
+	private static void EventRegeneration(Main main) {
+		for (Location blockLocation : main.getBlockLoc()) {
+			blockLocation.getBlock().setType(Material.SNOW_BLOCK);
+		}
+		main.getBlockLoc().clear();
 	}
 }

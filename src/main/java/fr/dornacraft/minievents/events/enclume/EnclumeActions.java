@@ -38,9 +38,9 @@ public class EnclumeActions {
 		}
 	}
 
-	public static void ClearAnvil(Main main, int lowestPointX, int lowestPointZ, int highestPointX, int highestPointZ) {
+	/*public static void ClearAnvil(Main main, int lowestPointX, int lowestPointZ, int highestPointX, int highestPointZ) {
 
-	}
+	}*/
 
 	public static void EventElimationMessage(Player players, Player playerEliminated, Main main) {
 		players.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + playerEliminated.getName()

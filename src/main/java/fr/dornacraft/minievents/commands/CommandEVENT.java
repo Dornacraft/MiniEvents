@@ -101,7 +101,7 @@ public class CommandEVENT implements CommandExecutor {
 				}
 			}
 		} else {
-			sender.sendMessage(main.prefix + "§cTu doit être sur le serveur pour effectuer sur cette commande !");
+			sender.sendMessage(main.prefix + "§cTu dois être sur le serveur pour effectuer sur cette commande !");
 		}
 		return false;
 	}

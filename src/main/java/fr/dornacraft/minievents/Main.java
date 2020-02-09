@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.dornacraft.minievents.commands.CommandEVENT;
 import fr.dornacraft.minievents.commands.TabComplete;
 import fr.dornacraft.minievents.events.enclume.listeners.EnclumeEntityDamageListener;
+import fr.dornacraft.minievents.events.spleef.listeners.BlockBreakListener;
 import fr.dornacraft.minievents.listeners.InventoryClickListener;
 import fr.dornacraft.minievents.listeners.PlayerJoinListener;
 import fr.dornacraft.minievents.listeners.PlayerQuitListener;
@@ -19,6 +21,7 @@ public class Main extends JavaPlugin {
 	public String prefix = "§7[§6MiniEvents§7] "; // Prefix pour les messages dans le chat.
 	private List<UUID> participants = new ArrayList<>(); // Liste des participants de l'événement.
 	private List<UUID> leaveDuringEvent = new ArrayList<>(); // Liste des joueurs déconnectés durant un événement.
+	private List<Location> blockLocation = new ArrayList<>(); // Liste de location de block
 	private GameState state; // État de l'événement.
 	private GameName name; // Nom de l'événement.
 
@@ -42,6 +45,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerTeleportListener(this), this);
+		getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
 
 		// Listeners ENCLUME:
 		getServer().getPluginManager().registerEvents(new EnclumeEntityDamageListener(this), this);
@@ -70,6 +74,12 @@ public class Main extends JavaPlugin {
 	// l'événement.
 	public List<UUID> getLeaveDuringEvent() {
 		return leaveDuringEvent;
+	}
+
+	// Méthode permettant de récuperer la liste des joueurs déconnectés durant
+	// l'événement.
+	public List<Location> getBlockLoc() {
+		return blockLocation;
 	}
 	// *****************************************************************************************//
 
