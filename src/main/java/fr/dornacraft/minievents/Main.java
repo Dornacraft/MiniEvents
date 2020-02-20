@@ -65,17 +65,17 @@ public class Main extends JavaPlugin {
 		return this.state;
 	}
 
-	// Récupere la liste des joueurs voulant jouer ou qui sont entrain de jouer.
+	// Récupère la liste des joueurs voulant jouer ou qui sont entrain de jouer.
 	public List<UUID> getParticipants() {
 		return participants;
 	}
 
-	// Récupere la liste des joueurs déconnectés durant l'événement.
+	// Récupère la liste des joueurs déconnectés durant l'événement.
 	public List<UUID> getLeaveDuringEvent() {
 		return leaveDuringEvent;
 	}
 
-	// Récupere une liste de locations de blocks.
+	// Récupère une liste de locations de blocks.
 	public List<Location> getBlockLoc() {
 		return blockLocation;
 	}
