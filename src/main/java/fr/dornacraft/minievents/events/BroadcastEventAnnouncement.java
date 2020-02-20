@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 
 public class BroadcastEventAnnouncement {
 
+	// Message envoyé à tous les joueurs présent sur le serveur lors du lancement
+	// d'un événement par un membre du personnel.
 	public static void BroadcastMessage(String eventName) {
 		Bukkit.broadcastMessage(" ");
 		Bukkit.broadcastMessage("  §7§l** §6Un événement §b§l" + eventName.toUpperCase() + " §r§6va bientôt démarrer ! §7§l**");

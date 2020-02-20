@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import fr.dornacraft.minievents.Main;
 
 public class OnJoinLeaveCommand {
+	
+	// Lorsqu'un joueur effectue la commande permettant de rejoindre un événement:
 	public static void EventJoin(Player player, Main main) {
 		player.teleport(GetSpawnsParameters.LocationEventSpawn(main));
 		PlayerSettings.setSettings(player);
@@ -15,6 +17,7 @@ public class OnJoinLeaveCommand {
 		}
 	}
 
+	// Lorsqu'un joueur effectue la commande permettant de quitter un événement:
 	public static void EventLeave(Player player, Main main) {
 		if (player.getWorld().getName().equalsIgnoreCase(GetEventWorld.getName(main))) {
 			player.teleport(GetSpawnsParameters.LocationEventSpawn(main));

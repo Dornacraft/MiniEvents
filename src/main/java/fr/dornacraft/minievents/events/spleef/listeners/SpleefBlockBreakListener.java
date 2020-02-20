@@ -13,18 +13,19 @@ import fr.dornacraft.minievents.GameName;
 import fr.dornacraft.minievents.GameState;
 import fr.dornacraft.minievents.Main;
 
-public class BlockBreakListener implements Listener {
-	
+public class SpleefBlockBreakListener implements Listener {
+
 	private Main main;
-	public BlockBreakListener(Main main) {
+
+	public SpleefBlockBreakListener(Main main) {
 		this.main = main;
 	}
-	
+
+	// Evénement enregistrant chaque blocs cassés lors d'un SPLEEF
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {
 		GameName name = main.getGameName();
 		GameState state = main.getGameState();
-		System.out.println("block cassé");
 		if (name == GameName.SPLEEF && state == GameState.PLAYING) {
 			Player player = event.getPlayer();
 			UUID playerUUID = player.getUniqueId();
@@ -32,9 +33,8 @@ public class BlockBreakListener implements Listener {
 				Block block = event.getBlock();
 				Material material = block.getType();
 				if (material == Material.SNOW_BLOCK) {
-					  main.getBlockLoc().add(block.getLocation());
-				}
-				else {
+					main.getBlockLoc().add(block.getLocation());
+				} else {
 					event.setCancelled(true);
 				}
 			}

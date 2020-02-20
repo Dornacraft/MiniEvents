@@ -10,15 +10,13 @@ import fr.dornacraft.minievents.Main;
 
 public class SpleefActions {
 
-	// *********************************************************************************************//
+	// Message spécifique à l'événement SPLEEF (Le joueur est tombé à l'eau)
 	public static void EventElimationMessageWater(Player players, Player playerOnWater, Main main) {
 		players.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + playerOnWater.getName()
 				+ " §7est tombé à l'eau !");
 	}
-	// *********************************************************************************************//
-
-	// *********************************************************************************************//
-
+	
+	// Méthode permettant d'obtenir la pelle de l'évent SPLEEF
 	public static ItemStack getSpleefShovel() {
 		ItemStack it = new ItemStack(Material.DIAMOND_SPADE, 1, (short) 0);
 		ItemMeta itM = it.getItemMeta();
@@ -28,6 +26,4 @@ public class SpleefActions {
 		it.setItemMeta(itM);
 		return it;
 	}
-
-	// *********************************************************************************************//
 }

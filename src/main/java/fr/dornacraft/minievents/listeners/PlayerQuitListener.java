@@ -29,44 +29,49 @@ public class PlayerQuitListener implements Listener {
 	//
 	// On le met ensuite dans la liste des déconnectés.
 	////////////////////////////////////////////////////
+
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
-		// Information sur l'état du jeu.
 		GameState state = main.getGameState();
 
-		// Information sur l'événement de déconnexion du joueur.
-		UUID playerUUID = event.getPlayer().getUniqueId();
+		Player player = event.getPlayer();
+		UUID playerUUID = player.getUniqueId();
+
 		if (state == GameState.WAITING || state == GameState.STARTING || state == GameState.PLAYING
 				|| state == GameState.FINISH) {
 			if (main.getParticipants().contains(playerUUID)) {
 
 				Player disconnectedPlayer = Bukkit.getPlayer(playerUUID);
+
 				main.getLeaveDuringEvent().add(playerUUID); // On l'ajoute dans liste des déconnectés.
 				main.getParticipants().remove(playerUUID); // On le supprime de la liste des participants.
 
+				// Le joueur s'est déconnecté quand l'événement était en WAITING.
 				if (state == GameState.WAITING) {
 					String eventName = main.getGameName().name().toLowerCase();
 					Integer maxPlayers = main.getConfig().getInt("config-event." + eventName + ".players.max-players");
-					
-					// Broadcast d'annonce, annonçant que le joueur à rejoint l'événement.
+
+					// Broadcast d'annonce, annonçant que le joueur a quitté l'événement.
 					Bukkit.broadcastMessage(disconnectedPlayer.getName() + "§7 s'est déconnecté §7(§c"
 							+ main.getParticipants().size() + "§7/§c" + maxPlayers + "§7).");
 				}
-				// Boucle qui envoit à tous les joueurs présent dans le monde événements, le
-				// message d'élimination du joueur qui s'est déconnecté.
-				if (state == GameState.PLAYING) {
+
+				// Le joueur s'est déconnecté quand l'événement était en STARTING ou PLAYING.
+				if (state == GameState.PLAYING || state == GameState.STARTING) {
+					// Envoit à tous les joueurs présent dans le monde des événements, le
+					// message d'élimination du joueur qui s'est déconnecté.
 					for (Player pls : Bukkit.getServer().getOnlinePlayers()) {
 						if (pls.getWorld().getName().equalsIgnoreCase(GetEventWorld.getName(main))) {
 							PlayerElimination.EventElimationMessageQuit(pls, disconnectedPlayer, main);
 						}
 					}
+					// On retire le joueur des participants.
+					main.getParticipants().remove(player.getUniqueId());
+					// Indique le nombre de joueur restant.
 					PlayerRemaining.PlayerLeft(main);
-					
-					// On regarde si après l'avoir supprimé de la liste des participants il y a un
-					// gagnant dans l'événement en cours.
+					// Après sa déconnexion, nous regardons si il y a un gagnant dans la partie.
 					WhoIsWinner.getWinner(main.getParticipants(), main);
 				}
-
 			}
 		}
 	}

@@ -22,18 +22,21 @@ public class InventoryClickListener implements Listener {
 		this.main = main;
 	}
 
+	// Evénement utilisé pour l'interface "graphique" de la liste des événements
+	// dans un inventaire séparé.
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		ItemStack currentType = event.getCurrentItem();
 		Inventory inv = event.getInventory();
-		
+
 		if (currentType == null) {
 			return;
 		}
+
 		if (inv.getName().equals("§0Menu des événements")) {
 			Player player = (Player) event.getWhoClicked();
 			String currentName = event.getCurrentItem().getItemMeta().getDisplayName();
-			
+
 			event.setCancelled(true);
 			List<GameName> eventNames = Arrays.asList(GameName.values());
 			for (int i = 0; i < eventNames.size(); i++) {
@@ -49,6 +52,7 @@ public class InventoryClickListener implements Listener {
 		}
 	}
 
+	// Message de téléportation lors d'un clic sur un item du menu.
 	private void messageAndTeleport(Main main, String eventName, Player player) {
 		player.closeInventory();
 		player.sendMessage(main.prefix + "§fTéléportation sur l'événement §b" + eventName.toUpperCase() + "§f.");

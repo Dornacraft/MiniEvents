@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import fr.dornacraft.minievents.GameName;
 import fr.dornacraft.minievents.GameState;
 import fr.dornacraft.minievents.Main;
-import fr.dornacraft.minievents.events.spleef.SpleefActions;
 
 public class OnStartEndOfEvent {
 
@@ -20,27 +19,28 @@ public class OnStartEndOfEvent {
 		main.setGameState(GameState.STARTING);
 		player.teleport(GetSpawnsParameters.LocationSpawnArene(main));
 		PlayerSettings.setSettings(player);
-		if (main.getGameName() == GameName.SPLEEF) {
-			player.getInventory().addItem(SpleefActions.getSpleefShovel());
-		}
+
+		main.getGameName().getSpecificItem(player); // Donne les objets de l'événement au joueur.
+		player.setInvulnerable(main.getGameName().getVulnerable()); // Donne l'invulnérabilité au joueur ou pas, selon les paramètres de l'événement.
 	}
 
 	// Cooldown de départ mais quand ce dernier se termine.
 	public static void CooldownStartOnEnd(Player player, Main main) {
-		player.setGameMode(GameMode.SURVIVAL);
+		// Met le mode de jeu associé à l'événement au joueur.
+		player.setGameMode(main.getGameName().getGamemode());
 	}
 
-	// Quand l'événement commence à se termine normalement avec 1 joueur restant
-	// GameState.FINISH
+	// Quand l'événement commence à se terminer normalement avec 1 joueur restant
+	// (GameState.FINISH)
 	public static void EventStateFinish(Main main) {
 		UUID playerWhoWinUUID = main.getParticipants().get(0);
 		Player playerWhoWin = Bukkit.getPlayer(playerWhoWinUUID);
 		String winner = playerWhoWin.getName();
 
 		// Message pour tous les joueurs
-		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().name().toUpperCase()
+		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getName().toUpperCase()
 				+ "§f] §7Bravo à tous les participants de l'événement !");
-		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().name().toUpperCase()
+		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getName().toUpperCase()
 				+ "§f] §7Le grand vainqueur de cette événement n'est autre que le joueur §6§l" + winner + "§7 !\n ");
 
 		playerWhoWin.setGameMode(GameMode.ADVENTURE);
@@ -51,13 +51,15 @@ public class OnStartEndOfEvent {
 	}
 
 	// Quand l'événement se termine réellement (R.A.Z.)
+	// (Après l'état FINISH)
 	public static void EventEndAndRAZ(Main main) {
 		EventRAZ(main);
 	}
 
-	// Quand un membre du personnel décide de faire la commande /event stop
+	// Quand un membre du personnel décide de faire la commande d'arrêt forcé de
+	// l'évenement.
 	public static void EventStop(Main main) {
-		Bukkit.broadcastMessage(main.prefix + "§cL'événement §c§l" + main.getGameName().name().toUpperCase()
+		Bukkit.broadcastMessage(main.prefix + "§cL'événement §c§l" + main.getGameName().getName().toUpperCase()
 				+ "§r§c a été arrêté manuellement !");
 
 		if (main.getParticipants().size() >= 1) {
@@ -73,22 +75,41 @@ public class OnStartEndOfEvent {
 		}
 		EventRAZ(main);
 	}
-	
-	
-//////////////////////////////////////////////////////////////////////////////
+
+	// Permet de lancer la régénération d'un événement.
 	private static void EventRegeneration(Main main) {
-		for (Location blockLocation : main.getBlockLoc()) {
-			blockLocation.getBlock().setType(Material.SNOW_BLOCK);
+		// On vérifie si la liste contient une valeur.
+		if (main.getBlockLoc().size() > 0) {
+
+			// Régénération du SPLEEF:
+			if (main.getGameName() == GameName.SPLEEF) {
+				for (Location blockLocation : main.getBlockLoc()) {
+					blockLocation.getBlock().setType(Material.SNOW_BLOCK);
+				}
+			}
+			// Régénération du BOWSPLEEF:
+			if (main.getGameName() == GameName.BOWSPLEEF) {
+				for (Location blockLocation : main.getBlockLoc()) {
+					blockLocation.getBlock().setType(Material.TNT);
+				}
+			}
+
+			// On vide la liste pour les prochains événements.
+			main.getBlockLoc().clear();
+
+		} else {
+			return;
 		}
-		main.getBlockLoc().clear();
 	}
-	
+
+	// Permet de remettre à zéro un événement.
 	private static void EventRAZ(Main main) {
+		EventRegeneration(main); // Régénération de la map
+
 		main.setGameState(GameState.NOTSTARTED); // Le status de jeu change en "NOTSTARTED", l'event se termine
 		main.setGameName(GameName.NONE); // Le jeu passe en "NONE" pour dire que aucun jeu n'a démarré.
-		main.getParticipants().clear();
-		main.getLeaveDuringEvent().clear();
-		EventRegeneration(main); // Régénération de la map
+		main.getParticipants().clear(); // On vide la liste des participants.
+		main.getLeaveDuringEvent().clear(); // De même pour ceux qui ont quitté en cours de route.
+
 	}
-//////////////////////////////////////////////////////////////////////////////
 }

@@ -41,9 +41,6 @@ public class SpleefDetection extends BukkitRunnable {
 							player.sendMessage(eventPrefix + "§7Tu as été éliminé, tu es tombé dans l'eau !");
 							PlayerElimination.EventEliminationTP(player, main);
 							
-							// On supprime le joueur des participants et on regarde si il y a un gagnant.
-							main.getParticipants().remove(player.getUniqueId());
-							
 							// On envoit à tous les joueurs dans le monde d'événement le message
 							// d'élimination.
 							for (Player pls : Bukkit.getServer().getOnlinePlayers()) {
@@ -51,8 +48,11 @@ public class SpleefDetection extends BukkitRunnable {
 									SpleefActions.EventElimationMessageWater(pls, player, main);
 								}
 							}
-							PlayerRemaining.PlayerLeft(main);
 							
+							// On supprime le joueur des participants et on regarde si il y a un gagnant.
+							main.getParticipants().remove(player.getUniqueId());
+							
+							PlayerRemaining.PlayerLeft(main);
 							WhoIsWinner.getWinner(main.getParticipants(), main);
 						}
 					}

@@ -10,9 +10,14 @@ import fr.dornacraft.minievents.Main;
 
 public class PlayerRemaining {
 	public static void PlayerLeft(Main main) {
-		
-		if (main.getGameState() == GameState.PLAYING || main.getGameState() == GameState.WAITING) {
-			String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+
+		// Permet d'afficher, après l'élimination d'un joueur le nombre restant de
+		// joueurs encore en jeu.
+		if (main.getGameState() == GameState.STARTING || main.getGameState() == GameState.PLAYING) {
+			// Permet juste d'éviter d'avoir le message :
+			// "Il reste désormais 1 joueur" après l'élimination du dernier joueur avant la
+			// fin de l'événement.
 			if (main.getParticipants().size() >= 2) {
 				for (UUID playerUUID : main.getParticipants()) {
 					Player players = Bukkit.getPlayer(playerUUID);

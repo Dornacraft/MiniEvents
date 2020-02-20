@@ -4,6 +4,8 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class PlayerSettings {
+	
+	// Permet de "réinitialiser" le joueur durant les différentes actions des événements.
 	public static void setSettings(Player player) {
 		player.setGameMode(GameMode.ADVENTURE);
 		player.setFoodLevel(20);

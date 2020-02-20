@@ -12,7 +12,7 @@ import fr.dornacraft.minievents.Main;
 
 public class CooldownOnStart extends BukkitRunnable {
 
-	private int cooldown = 15;
+	private int cooldown = 15; // (en secondes)
 	private Main main;
 
 	public CooldownOnStart(Main main) {
@@ -22,14 +22,11 @@ public class CooldownOnStart extends BukkitRunnable {
 	@Override
 	public void run() {
 		List<UUID> participants = main.getParticipants();
-		String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[§b" + main.getGameName().getName().toUpperCase() + "§f] ");
 
 		if (main.getGameState() == GameState.STARTING) {
 
-			// Si la tailel de la liste des participants est différente de 0 on affiche les
-			// messages
-			// aux joueurs participants sinon on envoit rien. (mais le cooldown se
-			// décrémente encore)
+			// La liste des participants contient toujours un joueur minimum:
 			if (participants.size() > 0) {
 				// ****************** Messages pour les joueurs ****************************//
 				for (UUID playerUUID : participants) {
@@ -46,36 +43,50 @@ public class CooldownOnStart extends BukkitRunnable {
 						player.sendMessage(eventPrefix + "§7Le jeu commance dans §b" + cooldown + " §7seconde !");
 					}
 					if (cooldown == 0) {
-						player.sendMessage(eventPrefix + "§7Le jeu commence ! À vos pelles et bonne chance à tous !");
+						player.sendMessage(eventPrefix + "§7Le jeu commence. Bonne chance à tous !");
 						OnStartEndOfEvent.CooldownStartOnEnd(player, main);
 					}
 				}
 				// *************************************************************************//
-				if (cooldown == 0 && participants.size() > 0) {
-					/*if (participants.size() <= 1) {
-						WhoIsWinner.getWinner(participants, main);
-						cancel();
-					} else {*/
-						main.setGameState(GameState.PLAYING); // On met le status de jeu en "PLAYING"
 
-						WhichEventIs.SelectEvent(main, "StartPlayingEvent");
-						cancel();
-					//}
+				// Lorsque le cooldown se termine et que la liste des participants contient
+				// toujours des joueurs, on lance l'événement en le passant à l'état PLAYING:
+				if (cooldown == 0 && participants.size() > 0) {
+					// Il reste un joueur maximum:
+					if (participants.size() <= 1) {
+						WhoIsWinner.getWinner(participants, main);
+					}
+					// Sinon on lance l'événement:
+					else {
+						main.setGameState(GameState.PLAYING);
+						WhichEventIs.SelectEvent(main); // On essaye de savoir quel événement est lancé.
+
+						// à partir d'ici la phase automatique de lancement s'arrête, le reste dépend
+						// simplement du développement des événements eux-mêmes.
+						// C'est aussi par cette méthode qu'on lance la première action de lancement de
+						// l'événement et qui va engendrer les autres.
+					}
+					cancel();
 				}
-			} else {
-				main.setGameState(GameState.WAITING); // On remet le status de jeu en "WAITING".
+			}
+			// Si cependant il y a plus aucun joueur:
+			else {
 				// On envoit un petit message à tous les joueurs du serveur.
 				Bukkit.broadcastMessage(main.prefix + "§cIl n'y a plus assez de joueurs pour commencer l'événement.");
 				Bukkit.broadcastMessage("  §7Tu peux faire la commande : §b/event join §7pour rejoindre l'event §b"
 						+ main.getGameName().name().toUpperCase());
-				// Et on enleve le cooldown.
+				main.setGameState(GameState.WAITING);
 				cancel();
 			}
-		} else {
-			// Si cependant l'état du jeu est différent de "STARTING" on annule directement
-			// cette boucle
+
+			// On décrémente la valeur "cooldown", pour permettre l'avancement de ce dernier
+			// pour le lancement de l'événement.
+			cooldown--;
+		}
+		// Si l'état du jeu est différent de STARTING, on arrête cette tâche
+		// (Simplement une sécurité)
+		else {
 			cancel();
 		}
-		cooldown--;
 	}
 }
