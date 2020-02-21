@@ -38,9 +38,9 @@ public class OnStartEndOfEvent {
 		String winner = playerWhoWin.getName();
 
 		// Message pour tous les joueurs
-		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getName().toUpperCase()
+		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getVisualName().toUpperCase()
 				+ "§f] §7Bravo à tous les participants de l'événement !");
-		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getName().toUpperCase()
+		Bukkit.broadcastMessage("\n§f[§b" + main.getGameName().getVisualName().toUpperCase()
 				+ "§f] §7Le grand vainqueur de cette événement n'est autre que le joueur §6§l" + winner + "§7 !\n ");
 
 		playerWhoWin.setGameMode(GameMode.ADVENTURE);
@@ -59,7 +59,7 @@ public class OnStartEndOfEvent {
 	// Quand un membre du personnel décide de faire la commande d'arrêt forcé de
 	// l'évenement.
 	public static void EventStop(Main main) {
-		Bukkit.broadcastMessage(main.prefix + "§cL'événement §c§l" + main.getGameName().getName().toUpperCase()
+		Bukkit.broadcastMessage(main.prefix + "§cL'événement §c§l" + main.getGameName().getVisualName().toUpperCase()
 				+ "§r§c a été arrêté manuellement !");
 
 		if (main.getParticipants().size() >= 1) {

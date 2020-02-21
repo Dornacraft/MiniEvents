@@ -29,18 +29,18 @@ public class SpleefDetection extends BukkitRunnable {
 		GameState state = main.getGameState();
 		Integer waterLayer = main.getConfig().getInt("config-event.spleef.water-detection.y");
 
-		String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
 
 		if (name == GameName.SPLEEF && state == GameState.PLAYING) {
-			if (main.getParticipants().size()>0) {
+			if (main.getParticipants().size() > 0) {
 				for (UUID playerUUID : main.getParticipants()) {
 					Player player = Bukkit.getPlayer(playerUUID);
-	
+
 					if (player.getWorld().getName().equalsIgnoreCase(GetEventWorld.getName(main))) {
 						if (player.getLocation().getBlockY() <= waterLayer) {
 							player.sendMessage(eventPrefix + "§7Tu as été éliminé, tu es tombé dans l'eau !");
 							PlayerElimination.EventEliminationTP(player, main);
-							
+
 							// On envoit à tous les joueurs dans le monde d'événement le message
 							// d'élimination.
 							for (Player pls : Bukkit.getServer().getOnlinePlayers()) {
@@ -48,17 +48,16 @@ public class SpleefDetection extends BukkitRunnable {
 									SpleefActions.EventElimationMessageWater(pls, player, main);
 								}
 							}
-							
+
 							// On supprime le joueur des participants et on regarde si il y a un gagnant.
 							main.getParticipants().remove(player.getUniqueId());
-							
+
 							PlayerRemaining.PlayerLeft(main);
 							WhoIsWinner.getWinner(main.getParticipants(), main);
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				cancel();
 			}
 		} else {

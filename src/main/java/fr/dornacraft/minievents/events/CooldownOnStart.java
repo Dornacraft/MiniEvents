@@ -22,7 +22,7 @@ public class CooldownOnStart extends BukkitRunnable {
 	@Override
 	public void run() {
 		List<UUID> participants = main.getParticipants();
-		String eventPrefix = ("§f[§b" + main.getGameName().getName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
 
 		if (main.getGameState() == GameState.STARTING) {
 
@@ -53,11 +53,13 @@ public class CooldownOnStart extends BukkitRunnable {
 				// toujours des joueurs, on lance l'événement en le passant à l'état PLAYING:
 				if (cooldown == 0 && participants.size() > 0) {
 					// Il reste un joueur maximum:
-					if (participants.size() <= 1) {
+					
+					/*if (participants.size() <= 1) {
 						WhoIsWinner.getWinner(participants, main);
-					}
+					}*/
+					
 					// Sinon on lance l'événement:
-					else {
+					/*else*/ {
 						main.setGameState(GameState.PLAYING);
 						WhichEventIs.SelectEvent(main); // On essaye de savoir quel événement est lancé.
 

@@ -1,9 +1,6 @@
 package fr.dornacraft.minievents.commands.args;
 
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import fr.dornacraft.minievents.GameState;
@@ -54,12 +51,10 @@ public class ArgJOIN {
 		else if (state == GameState.STARTING) {
 			player.sendMessage(prefix
 					+ "§cDésolé l'événement que tu veux rejoindre est en cours de lancement, impossible de le rejoindre !");
-		}
-		else if (state == GameState.PLAYING) {
+		} else if (state == GameState.PLAYING) {
 			player.sendMessage(prefix
-					+ "§cDésolé l'événement que tu veux rejoindre est en cours de fonctionnement, impossible de le ejoindre !");
-		}
-		else if (state == GameState.FINISH) {
+					+ "§cDésolé l'événement que tu veux rejoindre est en cours de fonctionnement, impossible de le rejoindre !");
+		} else if (state == GameState.FINISH) {
 			player.sendMessage(
 					prefix + "§cDésolé l'événement que tu veux rejoindre est terminé, impossible de le rejoindre !");
 		}

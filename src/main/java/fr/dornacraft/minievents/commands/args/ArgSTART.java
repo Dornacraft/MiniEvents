@@ -22,7 +22,7 @@ public class ArgSTART {
 			main.setGameState(GameState.WAITING); // On met l'évenement en WAITING (attente de joueurs).
 			main.setGameName(eventName); // On dit que l'événement sera celui qu'on a écrit dans le commande.
 
-			BroadcastEventAnnouncement.BroadcastMessage(main.getGameName().name()); // Message d'annonce dans le chat.
+			BroadcastEventAnnouncement.BroadcastMessage(main.getGameName().getVisualName().toUpperCase()); // Message d'annonce dans le chat.
 		}
 	}
 }

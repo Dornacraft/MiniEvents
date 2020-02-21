@@ -9,8 +9,8 @@ public class PlayerElimination {
 	// Téléporte le joueur au spawn de l'événement et le "réinitialise".
 	public static void EventEliminationTP(Player player, Main main) {
 		if (player.getWorld().getName().equalsIgnoreCase(GetEventWorld.getName(main))) {
-			player.teleport(GetSpawnsParameters.LocationEventSpawn(main));
 			PlayerSettings.setSettings(player);
+			player.teleport(GetSpawnsParameters.LocationEventSpawn(main));
 		}
 	}
 

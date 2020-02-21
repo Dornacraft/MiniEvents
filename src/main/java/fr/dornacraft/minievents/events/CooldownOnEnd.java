@@ -22,7 +22,7 @@ public class CooldownOnEnd extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		String eventPrefix = ("§f[§b" + main.getGameName().getName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
 		List<UUID> participants = main.getParticipants();
 
 		// Si l'état du jeu est en FINISH
@@ -32,12 +32,12 @@ public class CooldownOnEnd extends BukkitRunnable {
 				Player player = Bukkit.getPlayer(playerUUID);
 				// Quand le cooldown est égal à 5 secondes on affiche ce message :
 				if (cooldown == 5) {
-					player.sendMessage("§f[§b" + eventPrefix + "§f] §7Téléportation hors de la zone dans §b" + cooldown
+					player.sendMessage(eventPrefix + "§7Téléportation hors de la zone dans §b" + cooldown
 							+ " §7secondes !");
 				}
 				// Quand le cooldown se termine, on affiche ce message :
 				if (cooldown == 0) {
-					player.sendMessage("§f[§b" + eventPrefix + "§f] §7Téléportation hors de la zone !");
+					player.sendMessage(eventPrefix + "§7Téléportation hors de la zone !");
 					player.teleport(GetSpawnsParameters.LocationEventSpawn(main));
 					PlayerSettings.setSettings(player);
 				}

@@ -9,7 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.dornacraft.minievents.commands.CommandEVENT;
 import fr.dornacraft.minievents.commands.TabComplete;
-import fr.dornacraft.minievents.events.bowspleef.listeners.BowSpleefBlockIgniteListener;
+import fr.dornacraft.minievents.events.bowspleef.listeners.BowSpleefArrowHitListener;
+import fr.dornacraft.minievents.events.bowspleef.listeners.BowSpleefEntityExplodeListener;
 import fr.dornacraft.minievents.events.enclume.listeners.EnclumeEntityDamageListener;
 import fr.dornacraft.minievents.events.spleef.listeners.SpleefBlockBreakListener;
 import fr.dornacraft.minievents.listeners.InventoryClickListener;
@@ -52,7 +53,8 @@ public class Main extends JavaPlugin {
 	private void activeGameListeners() {
 		getServer().getPluginManager().registerEvents(new SpleefBlockBreakListener(this), this);
 		getServer().getPluginManager().registerEvents(new EnclumeEntityDamageListener(this), this);
-		getServer().getPluginManager().registerEvents(new BowSpleefBlockIgniteListener(this), this);
+		getServer().getPluginManager().registerEvents(new BowSpleefArrowHitListener(this), this);
+		getServer().getPluginManager().registerEvents(new BowSpleefEntityExplodeListener(this), this);
 	}
 
 	// Modifier l'état de l'event.

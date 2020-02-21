@@ -20,16 +20,14 @@ public class ArgFORCERUN {
 			player.sendMessage(prefix
 					+ "§cAucun événement en cours, fait la commande §b/event start <§7event§b>§c pour lancer un événement.");
 		} else if (state == GameState.WAITING) {
-			if (name == GameName.SPLEEF || name == GameName.ENCLUME) {
-				if (main.getParticipants().size() >= 1) {
-					main.setGameState(GameState.STARTING);
+			if (main.getParticipants().size() >= 1) {
+				main.setGameState(GameState.STARTING);
 
-					CooldownOnStart start = new CooldownOnStart(main);
-					start.runTaskTimer(main, 0, 20);
-				} else {
-					if (main.getParticipants().size() == 0) {
-						player.sendMessage(prefix + "§cPour forcer le début d'une partie, il faut minimum 1 joueur.");
-					}
+				CooldownOnStart start = new CooldownOnStart(main);
+				start.runTaskTimer(main, 0, 20);
+			} else {
+				if (main.getParticipants().size() == 0) {
+					player.sendMessage(prefix + "§cPour forcer le début d'une partie, il faut minimum 1 joueur.");
 				}
 			}
 		}

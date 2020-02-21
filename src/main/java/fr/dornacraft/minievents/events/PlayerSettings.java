@@ -1,7 +1,10 @@
 package fr.dornacraft.minievents.events;
 
+import java.util.Collection;
+
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 public class PlayerSettings {
 	
@@ -14,5 +17,12 @@ public class PlayerSettings {
 		player.setInvulnerable(false);
 		player.setFallDistance(0);
 		player.getInventory().clear();
+		
+		Collection<PotionEffect> playerEffect = player.getActivePotionEffects();
+		if(playerEffect.size() > 0) {
+			for (PotionEffect potionEffect : playerEffect) {
+				player.removePotionEffect(potionEffect.getType());
+			}
+		}
 	}
 }
