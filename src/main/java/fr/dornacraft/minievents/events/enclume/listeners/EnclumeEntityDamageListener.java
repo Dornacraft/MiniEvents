@@ -17,6 +17,7 @@ import fr.dornacraft.minievents.GameState;
 import fr.dornacraft.minievents.Main;
 import fr.dornacraft.minievents.events.GetEventWorld;
 import fr.dornacraft.minievents.events.PlayerElimination;
+import fr.dornacraft.minievents.events.PlayerRemaining;
 import fr.dornacraft.minievents.events.WhoIsWinner;
 import fr.dornacraft.minievents.events.enclume.EnclumeActions;
 
@@ -32,7 +33,7 @@ public class EnclumeEntityDamageListener implements Listener {
 	public void onDamage(EntityDamageByEntityEvent event) {
 		GameName name = main.getGameName();
 		GameState state = main.getGameState();
-		String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 		
 		if (name == GameName.ENCLUME && state == GameState.PLAYING) {
 			Entity defender = event.getEntity();
@@ -53,6 +54,7 @@ public class EnclumeEntityDamageListener implements Listener {
 									EnclumeActions.EventElimationMessage(players, player, main);
 								}
 							}
+							PlayerRemaining.PlayerLeft(main);
 							main.getParticipants().remove(playerUUID);
 							
 							WhoIsWinner.getWinner(main.getParticipants(), main);

@@ -29,7 +29,7 @@ public class EnclumeMiniWavesTimer extends BukkitRunnable {
 		GameState state = main.getGameState();
 		if (name == GameName.ENCLUME && state == GameState.PLAYING) {
 			if (totalMiniWaves == 2 && timer == 20) {
-				String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+				String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 				for (UUID playerUUID : main.getParticipants()) {
 					Player player = Bukkit.getPlayer(playerUUID);
 					player.sendMessage(eventPrefix + "§7La vague d'enclumes §b§ln°" + waveNumber + " §7arrive !!");

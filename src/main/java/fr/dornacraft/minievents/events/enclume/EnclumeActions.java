@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 
 import fr.dornacraft.minievents.Main;
 import fr.dornacraft.minievents.events.GetEventWorld;
-import fr.dornacraft.minievents.events.PlayerRemaining;
 import fr.dornacraft.minievents.events.enclume.tasks.EnclumeAnvilClear;
 import fr.dornacraft.minievents.events.enclume.tasks.EnclumeMiniWavesTimer;
 
@@ -43,9 +42,8 @@ public class EnclumeActions {
 	}*/
 
 	public static void EventElimationMessage(Player players, Player playerEliminated, Main main) {
-		players.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + playerEliminated.getName()
+		players.sendMessage("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] §c" + playerEliminated.getName()
 				+ " §7s'est fait écraser !");
-		PlayerRemaining.PlayerLeft(main);
 	}
 
 }

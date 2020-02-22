@@ -59,7 +59,7 @@ public class PlayerJoinListener implements Listener {
 
 			// Le joueur se reconnecte quand l'événement est en WAITING:
 			if (state == GameState.WAITING) {
-				String eventName = main.getGameName().name().toLowerCase();
+				String eventName = main.getGameName().getRealName().toLowerCase();
 				Integer maxPlayers = main.getConfig().getInt("config-event." + eventName + ".players.max-players");
 
 				// Si il reste encore une place dans la liste d'attente, alors on le rajoute à

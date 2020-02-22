@@ -21,7 +21,7 @@ public class BowSpleefActions {
 	}
 
 	public static void EventElimationMessageFall(Player pls, Player player, Main main) {
-		pls.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + player.getName()
+		pls.sendMessage("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] §c" + player.getName()
 		+ " §7est tombé de très haut !");
 	}
 }

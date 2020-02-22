@@ -29,7 +29,7 @@ public class SpleefDetection extends BukkitRunnable {
 		GameState state = main.getGameState();
 		Integer waterLayer = main.getConfig().getInt("config-event.spleef.water-detection.y");
 
-		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 
 		if (name == GameName.SPLEEF && state == GameState.PLAYING) {
 			if (main.getParticipants().size() > 0) {

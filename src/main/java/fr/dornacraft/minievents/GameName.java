@@ -20,8 +20,8 @@ import fr.dornacraft.minievents.events.spleef.SpleefActions;
 public enum GameName {
 	NONE("NONE", "Aucun"),
 	SPLEEF("SPLEEF", "Spleef", Material.DIAMOND_SPADE, 0, true, ChatColor.BLUE, true, 0, "pelle"),
-	ENCLUME("ENCLUME", "Enclume", Material.ANVIL, 0, false, ChatColor.GRAY, false, 2, "-"),
-	BOWSPLEEF("BOWSPLEEF", "Super BowSpleef", Material.BOW, 0, true, ChatColor.RED, true, 2, "arc"),
+	ENCLUME("ENCLUME", "Enclume", Material.ANVIL, 0, false, ChatColor.DARK_GRAY, false, 2, "-"),
+	BOWSPLEEF("BOWSPLEEF", "BowSpleef", Material.BOW, 0, true, ChatColor.DARK_RED, true, 2, "arc"),
 	LAINE("LAINE", "Laine", Material.WOOL, 0, false, ChatColor.WHITE, true, 2, "-"),
 	TNT_RUN("TNT_RUN", "TNT Run", Material.TNT, 0, false, ChatColor.RED, true, 2, "-"),
 	DAC("DAC", "Dés à Coudre", Material.BUCKET, 0, false, ChatColor.GRAY, true, 2, "-"),
@@ -93,7 +93,7 @@ public enum GameName {
 
 		ItemStack item = new ItemStack(gameName.getItemMaterial(), 1, (short) damage);
 		ItemMeta itemMeta = item.getItemMeta();
-		itemMeta.setDisplayName("§f§lEvent: §r" + gameName.getTextColor() + gameName.getVisualName().toUpperCase());
+		itemMeta.setDisplayName("§f§lEvent: §r" + gameName.getEventColoredPrefix().toUpperCase());
 		if (gameName.getItemEnchant()) {
 			itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 			itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -118,6 +118,11 @@ public enum GameName {
 		return this.visualColor;
 	}
 
+	public String getEventColoredPrefix() {
+		String eventPrefix = (this.getTextColor() + this.getVisualName());
+		return eventPrefix;
+	}
+	
 	public boolean getVulnerable() {
 		return this.invulnerable;
 	}
@@ -136,9 +141,7 @@ public enum GameName {
 	}
 
 	public void getSpecificItem(Player player) {
-		if (this.itemName.equals("-")) {
-			return;
-		} else if (this.itemName.equals("pelle")) {
+		if (this.itemName.equals("pelle")) {
 			player.getInventory().addItem(SpleefActions.getSpleefShovel());
 		} else if (this.itemName.equals("arc")) {
 			player.getInventory().addItem(BowSpleefActions.getFireBow());

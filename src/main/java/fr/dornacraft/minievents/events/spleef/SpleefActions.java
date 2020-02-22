@@ -12,7 +12,7 @@ public class SpleefActions {
 
 	// Message spécifique à l'événement SPLEEF (Le joueur est tombé à l'eau)
 	public static void EventElimationMessageWater(Player players, Player playerOnWater, Main main) {
-		players.sendMessage("§f[§b" + main.getGameName().name().toUpperCase() + "§f] §c" + playerOnWater.getName()
+		players.sendMessage("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] §c" + playerOnWater.getName()
 				+ " §7est tombé à l'eau !");
 	}
 	

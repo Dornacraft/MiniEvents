@@ -86,12 +86,14 @@ public class BowSpleefArrowHitListener implements Listener {
 							Player player = (Player) entityHit;
 							if (main.getParticipants().contains(player.getUniqueId())) {
 								if (player.hasPotionEffect(PotionEffectType.LEVITATION)) {
-									Vector playerVelocity = new Vector(projectile.getVelocity().getX(), 0, projectile.getVelocity().getZ());
+									Vector playerVelocity = new Vector(projectile.getVelocity().getX()/3, 0, projectile.getVelocity().getZ()/3);
 									player.setVelocity(playerVelocity);
 									event.getEntity().remove();
 									return;
 								} 
 								else if (player.hasPotionEffect(PotionEffectType.GLOWING) && !player.hasPotionEffect(PotionEffectType.LEVITATION)) {
+									Vector playerVelocity = new Vector(projectile.getVelocity().getX()/3, 0, projectile.getVelocity().getZ()/3);
+									player.setVelocity(playerVelocity);
 									return;
 								}
 								else {

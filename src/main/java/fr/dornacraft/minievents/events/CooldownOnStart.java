@@ -22,7 +22,7 @@ public class CooldownOnStart extends BukkitRunnable {
 	@Override
 	public void run() {
 		List<UUID> participants = main.getParticipants();
-		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 
 		if (main.getGameState() == GameState.STARTING) {
 

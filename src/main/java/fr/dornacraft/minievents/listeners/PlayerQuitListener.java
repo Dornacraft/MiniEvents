@@ -48,7 +48,7 @@ public class PlayerQuitListener implements Listener {
 
 				// Le joueur s'est déconnecté quand l'événement était en WAITING.
 				if (state == GameState.WAITING) {
-					String eventName = main.getGameName().name().toLowerCase();
+					String eventName = main.getGameName().getRealName().toLowerCase();
 					Integer maxPlayers = main.getConfig().getInt("config-event." + eventName + ".players.max-players");
 
 					// Broadcast d'annonce, annonçant que le joueur a quitté l'événement.
@@ -69,8 +69,11 @@ public class PlayerQuitListener implements Listener {
 					main.getParticipants().remove(player.getUniqueId());
 					// Indique le nombre de joueur restant.
 					PlayerRemaining.PlayerLeft(main);
-					// Après sa déconnexion, nous regardons si il y a un gagnant dans la partie.
-					WhoIsWinner.getWinner(main.getParticipants(), main);
+					
+					if (state == GameState.PLAYING) {
+						// Après sa déconnexion, nous regardons si il y a un gagnant dans la partie.
+						WhoIsWinner.getWinner(main.getParticipants(), main);
+					}
 				}
 			}
 		}

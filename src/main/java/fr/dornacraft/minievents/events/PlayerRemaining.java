@@ -10,7 +10,7 @@ import fr.dornacraft.minievents.Main;
 
 public class PlayerRemaining {
 	public static void PlayerLeft(Main main) {
-		String eventPrefix = ("§f[§b" + main.getGameName().name().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 
 		// Permet d'afficher, après l'élimination d'un joueur le nombre restant de
 		// joueurs encore en jeu.
@@ -21,7 +21,7 @@ public class PlayerRemaining {
 			if (main.getParticipants().size() >= 2) {
 				for (UUID playerUUID : main.getParticipants()) {
 					Player players = Bukkit.getPlayer(playerUUID);
-					players.sendMessage(eventPrefix + "§7Il reste désormais " + (main.getParticipants().size()));
+					players.sendMessage(eventPrefix + "§7Il reste désormais §b" + (main.getParticipants().size()) + " joueurs !");
 				}
 			}
 		}

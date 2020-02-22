@@ -34,6 +34,7 @@ public class SpleefBlockBreakListener implements Listener {
 				Material material = block.getType();
 				if (material == Material.SNOW_BLOCK) {
 					main.getBlockLoc().add(block.getLocation());
+					event.setDropItems(false);
 				} else {
 					event.setCancelled(true);
 				}

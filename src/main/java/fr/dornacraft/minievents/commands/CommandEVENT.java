@@ -70,7 +70,7 @@ public class CommandEVENT implements CommandExecutor {
 					if (args.length >= 2) {
 						List<GameName> eventNames = Arrays.asList(GameName.values());
 						for (int i = 0; i < eventNames.size(); i++) {
-							if (eventNames.get(i).getRealName().equals("NONE"));
+							if (eventNames.get(i).getRealName().equals("NONE"))
 								i++;
 							if (eventNames.get(i).getRealName().equalsIgnoreCase(args[1])) {
 								ArgSTART.ArgStart(player, main, eventNames.get(i));

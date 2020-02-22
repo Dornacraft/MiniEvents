@@ -30,7 +30,7 @@ public class BowSpleefDetection extends BukkitRunnable{
 		GameName name = main.getGameName();
 		GameState state = main.getGameState();
 
-		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 
 		if (name == GameName.BOWSPLEEF && (state == GameState.PLAYING || state == GameState.FINISH)) {
 			if (main.getParticipants().size()>0) {

@@ -22,7 +22,7 @@ public class CooldownOnEnd extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		String eventPrefix = ("§f[§b" + main.getGameName().getVisualName().toUpperCase() + "§f] ");
+		String eventPrefix = ("§f[" + main.getGameName().getEventColoredPrefix().toUpperCase() + "§f] ");
 		List<UUID> participants = main.getParticipants();
 
 		// Si l'état du jeu est en FINISH

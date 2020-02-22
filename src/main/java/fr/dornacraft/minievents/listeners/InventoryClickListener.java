@@ -40,9 +40,8 @@ public class InventoryClickListener implements Listener {
 			event.setCancelled(true);
 			List<GameName> eventNames = Arrays.asList(GameName.values());
 			for (int i = 0; i < eventNames.size(); i++) {
-				String eventName = eventNames.get(i).name();
-				if (currentName.equals("§fEvent:§f§l " + eventName.toUpperCase())) {
-					messageAndTeleport(main, eventNames.get(i).name(), player);
+				if (currentName.equals("§f§lEvent: §r" + eventNames.get(i).getEventColoredPrefix().toUpperCase())) {
+					messageAndTeleport(main, eventNames.get(i), player);
 					return;
 				}
 
@@ -53,9 +52,9 @@ public class InventoryClickListener implements Listener {
 	}
 
 	// Message de téléportation lors d'un clic sur un item du menu.
-	private void messageAndTeleport(Main main, String eventName, Player player) {
+	private void messageAndTeleport(Main main, GameName gameName, Player player) {
 		player.closeInventory();
-		player.sendMessage(main.prefix + "§fTéléportation sur l'événement §b" + eventName.toUpperCase() + "§f.");
-		player.teleport(GetSpawnsParameters.EventTeleportOnSpawn(main, eventName));
+		player.sendMessage(main.prefix + "§fTéléportation sur l'événement " + gameName.getEventColoredPrefix().toUpperCase() + "§f.");
+		player.teleport(GetSpawnsParameters.EventTeleportOnSpawn(main, gameName.getRealName()));
 	}
 }
