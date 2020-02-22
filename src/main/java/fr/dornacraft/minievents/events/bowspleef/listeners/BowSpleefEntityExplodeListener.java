@@ -33,15 +33,13 @@ public class BowSpleefEntityExplodeListener implements Listener {
 		GameState eventState = main.getGameState();
 
 		if (entity.getLocation().getWorld().getName().equals(GetEventWorld.getName(main))) {
-			if (eventName == GameName.BOWSPLEEF) {
-				if (entity.getCustomName().equals("BowSpleefTNT")) {
-					if (eventState == GameState.PLAYING || eventState == GameState.FINISH) {
-						event.setCancelled(true);
-						spawnFireWork(entity);
-					}
-					else {
-						event.setCancelled(true);
-					}
+			if (entity.getCustomName().equals("BowSpleefTNT")) {
+				if (eventName == GameName.BOWSPLEEF
+						&& (eventState == GameState.PLAYING || eventState == GameState.FINISH)) {
+					event.setCancelled(true);
+					spawnFireWork(entity);
+				} else {
+					event.setCancelled(true);
 				}
 			}
 		}
@@ -52,16 +50,20 @@ public class BowSpleefEntityExplodeListener implements Listener {
 		FireworkMeta fwm = fw.getFireworkMeta();
 
 		Random r = new Random();
-		
-        int rt = r.nextInt(3) + 1;
-        Type type = null;       
-        if (rt == 1) type = Type.BALL;
-        if (rt == 2) type = Type.BALL_LARGE;
-        if (rt == 3) type = Type.BURST;
-        if (rt == 4) type = Type.STAR;
-        
-		FireworkEffect effect = FireworkEffect.builder().flicker(r.nextBoolean()).withColor(Color.RED).withFade(Color.BLACK)
-				.with(type).trail(false).build();
+
+		int rt = r.nextInt(3) + 1;
+		Type type = null;
+		if (rt == 1)
+			type = Type.BALL;
+		if (rt == 2)
+			type = Type.BALL_LARGE;
+		if (rt == 3)
+			type = Type.BURST;
+		if (rt == 4)
+			type = Type.STAR;
+
+		FireworkEffect effect = FireworkEffect.builder().flicker(r.nextBoolean()).withColor(Color.RED)
+				.withFade(Color.BLACK).with(type).trail(false).build();
 
 		fwm.clearEffects();
 		fwm.addEffect(effect);
