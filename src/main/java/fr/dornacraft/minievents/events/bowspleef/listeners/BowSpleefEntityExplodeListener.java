@@ -34,10 +34,13 @@ public class BowSpleefEntityExplodeListener implements Listener {
 
 		if (entity.getLocation().getWorld().getName().equals(GetEventWorld.getName(main))) {
 			if (eventName == GameName.BOWSPLEEF) {
-				if (eventState == GameState.PLAYING || eventState == GameState.FINISH) {
-					if (entity.getCustomName().equals("BowSpleefTNT")) {
+				if (entity.getCustomName().equals("BowSpleefTNT")) {
+					if (eventState == GameState.PLAYING || eventState == GameState.FINISH) {
 						event.setCancelled(true);
 						spawnFireWork(entity);
+					}
+					else {
+						event.setCancelled(true);
 					}
 				}
 			}
@@ -50,8 +53,8 @@ public class BowSpleefEntityExplodeListener implements Listener {
 
 		Random r = new Random();
 		
-        int rt = r.nextInt(2) + 1;
-        Type type = Type.BALL;       
+        int rt = r.nextInt(3) + 1;
+        Type type = null;       
         if (rt == 1) type = Type.BALL;
         if (rt == 2) type = Type.BALL_LARGE;
         if (rt == 3) type = Type.BURST;
