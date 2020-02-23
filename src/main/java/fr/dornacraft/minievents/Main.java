@@ -51,9 +51,7 @@ public class Main extends JavaPlugin {
 	}
 
 	private void activeGameListeners() {
-		if (this.getGameName() == GameName.SPLEEF) {
-			getServer().getPluginManager().registerEvents(new SpleefBlockBreakListener(this), this);
-		}
+		getServer().getPluginManager().registerEvents(new SpleefBlockBreakListener(this), this);
 		getServer().getPluginManager().registerEvents(new EnclumeEntityDamageListener(this), this);
 		getServer().getPluginManager().registerEvents(new BowSpleefArrowHitListener(this), this);
 		getServer().getPluginManager().registerEvents(new BowSpleefEntityExplodeListener(this), this);
